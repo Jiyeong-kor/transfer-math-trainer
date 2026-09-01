@@ -67,6 +67,7 @@ for (const problem of problems || []) {
 const expectedMath = new Map([
   ["P-DIFF-LIMIT-006-EX3", "|x²-4|=|x-2||x+2|<5|x-2|"],
   ["P-DIFF-LIMIT-007-EX4", "|√(x-1)-2|≤|x-5|/2"],
+  ["P-DIFF-CONT-001-EX3", "lim x→a f(x), f(a)"],
 ]);
 for (const [id, math] of expectedMath) {
   const problem = (problems || []).find((item) => item.id === id);
