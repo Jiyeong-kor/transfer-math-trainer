@@ -19,9 +19,13 @@ jobs:
       - name: 자바스크립트 구문 검증
         run: |
           node --check app.js
+          node --check quiz-ux.js
+          node --check app-update.js
           node --check sw.js
           for f in core/*.js content/*.js scripts/*.mjs; do node --check "$f"; done
       - name: 학습 데이터 검증
         run: node scripts/validate-data.mjs
       - name: 적응형 학습 엔진 테스트
         run: node scripts/test-core.mjs
+      - name: 문제풀이 UX 회귀 검증
+        run: node scripts/validate-quiz-ux.mjs
