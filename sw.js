@@ -29,6 +29,7 @@ const ASSETS = [
   "./content/problems-linear.js",
   "./content/problems-adaptive.js",
   "./content/problems-transfer-advanced.js",
+  "./content/problem-safety.js",
   "./content/learner-seed.js"
 ];
 

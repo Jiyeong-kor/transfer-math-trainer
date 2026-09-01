@@ -25,6 +25,8 @@ jobs:
           for f in core/*.js content/*.js scripts/*.mjs; do node --check "$f"; done
       - name: 학습 데이터 검증
         run: node scripts/validate-data.mjs
+      - name: 정답 노출 회귀 검증
+        run: node scripts/validate-answer-safety.mjs
       - name: 적응형 학습 엔진 테스트
         run: node scripts/test-core.mjs
       - name: 문제풀이 UX 회귀 검증
