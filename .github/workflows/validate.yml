@@ -16,18 +16,12 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 22
-      - name: 학습 데이터 검증
-        run: node scripts/validate-data.mjs
       - name: 자바스크립트 구문 검증
         run: |
           node --check app.js
-          node --check core/storage.js
-          node --check core/mastery.js
-          node --check core/scheduler.js
-          node --check core/session.js
-          node --check content/curriculum.js
-          node --check content/concepts.js
-          node --check content/lessons.js
-          node --check content/problems.js
-          node --check content/learner-seed.js
           node --check sw.js
+          for f in core/*.js content/*.js scripts/*.mjs; do node --check "$f"; done
+      - name: 학습 데이터 검증
+        run: node scripts/validate-data.mjs
+      - name: 적응형 학습 엔진 테스트
+        run: node scripts/test-core.mjs
