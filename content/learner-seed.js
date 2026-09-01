@@ -1,8 +1,8 @@
 window.TRANSFER_MATH_LEARNER_SEED = {
   "FND-ABS-001": {
-    status: "partial",
-    evidence: "|x-2|<1에서 x의 범위를 구할 수 있다는 흐름은 이해했으나, 이 조건을 왜 도입하는지와 연결하는 과정이 약했습니다.",
-    errorType: "reasoning",
+    status: "understood",
+    evidence: "|x-2|<1에서 1<x<3으로 x의 범위를 구하는 과정은 이해했다고 확인했습니다.",
+    errorType: null,
     lastCheckedAt: "2026-08-30T00:00:00+09:00"
   },
   "FND-ALG-001": {
@@ -12,9 +12,9 @@ window.TRANSFER_MATH_LEARNER_SEED = {
     lastCheckedAt: "2026-08-30T00:00:00+09:00"
   },
   "MATH-DIFF-LIMIT-001": {
-    status: "partial",
-    evidence: "δ가 |x-a|를 제한한다는 방향은 이해했으나 보조 상한 도입까지는 완전히 연결되지 않았습니다.",
-    errorType: "reasoning",
+    status: "understood",
+    evidence: "δ가 |x-a|, 즉 입력 쪽 거리를 제한한다는 점을 이해했다고 확인했습니다.",
+    errorType: null,
     lastCheckedAt: "2026-08-30T00:00:00+09:00"
   },
   "MATH-DIFF-LIMIT-002": {
@@ -24,14 +24,14 @@ window.TRANSFER_MATH_LEARNER_SEED = {
     lastCheckedAt: "2026-08-30T00:00:00+09:00"
   },
   "MATH-DIFF-LIMIT-003": {
-    status: "partial",
-    evidence: "|x+2|가 문제라는 점은 인식했지만 상한을 만드는 전체 논리가 아직 안정적이지 않습니다.",
-    errorType: "reasoning",
+    status: "understood",
+    evidence: "인수분해 뒤 |x+2|가 δ로 바로 통제되지 않는 문제 인자라는 점을 직접 짚었습니다.",
+    errorType: null,
     lastCheckedAt: "2026-08-30T00:00:00+09:00"
   },
   "MATH-DIFF-LIMIT-004": {
     status: "relearn",
-    evidence: "왜 |x-2|<1을 추가하는지, 1을 어느 식에 넣는지 반복해서 질문했습니다.",
+    evidence: "왜 |x-2|<1을 추가하는지와 그 1이 풀이의 어느 조건에 쓰이는지를 반복해서 질문했습니다.",
     errorType: "reasoning",
     lastCheckedAt: "2026-08-30T00:00:00+09:00"
   },
@@ -43,7 +43,7 @@ window.TRANSFER_MATH_LEARNER_SEED = {
   },
   "MATH-DIFF-LIMIT-006": {
     status: "relearn",
-    evidence: "고정 제한 1과 ε에 따른 제한을 함께 두는 이유가 혼동의 핵심으로 확인되었습니다.",
+    evidence: "고정 제한 1과 ε에 따른 제한을 함께 두고 min으로 결합하는 이유가 혼동의 핵심으로 확인되었습니다.",
     errorType: "reasoning",
     lastCheckedAt: "2026-08-30T00:00:00+09:00"
   },
