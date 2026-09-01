@@ -23,6 +23,21 @@ jobs:
     steps:
       - name: 저장소 체크아웃
         uses: actions/checkout@v5
+      - name: Node.js 설정
+        uses: actions/setup-node@v5
+        with:
+          node-version: 22
+      - name: 자바스크립트 구문 검증
+        run: |
+          node --check app.js
+          node --check quiz-ux.js
+          node --check app-update.js
+          node --check sw.js
+      - name: 학습 데이터와 문제풀이 UX 검증
+        run: |
+          node scripts/validate-data.mjs
+          node scripts/test-core.mjs
+          node scripts/validate-quiz-ux.mjs
       - name: Pages 설정
         uses: actions/configure-pages@v5
       - name: 정적 사이트 업로드
