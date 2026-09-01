@@ -27,7 +27,7 @@
 
   function isHardBlocker(state, conceptId) {
     const status = window.TransferMathMastery.recordFor(state, conceptId).status;
-    return status === "unseen" || status === "unassessed" || status === "relearn";
+    return status === "unseen" || status === "unassessed" || status === "relearn" || status === "partial";
   }
 
   function firstHardBlocker(state, concept) {
@@ -76,7 +76,7 @@
       if (record.status === "stable" || record.status === "understood") continue;
       const blocker = firstHardBlocker(state, concept);
       if (blocker && !excluded.has(blocker.id)) return blocker;
-      if (!blocker) return concept;
+      if (!blocker && record.status !== "relearn" && record.status !== "partial") return concept;
     }
     return null;
   }
@@ -98,23 +98,17 @@
     })[0] || null;
   }
 
-  function chooseProblem(conceptId, dayKey, blockKey) {
+  function chooseProblem(conceptId, dayKey, blockKey, revision = 0) {
     const map = problemsByConcept();
     const problems = map.get(conceptId) || [];
     if (!problems.length) return null;
-    const index = hash(`${dayKey}:${blockKey}:${conceptId}`) % problems.length;
+    const index = hash(`${dayKey}:${revision}:${blockKey}:${conceptId}`) % problems.length;
     return problems[index];
   }
 
   function makeBlock(key, label, concept, problem, reason) {
     if (!concept || !problem) return null;
-    return {
-      key,
-      label,
-      conceptId: concept.id,
-      problemId: problem.id,
-      reason,
-    };
+    return { key, label, conceptId: concept.id, problemId: problem.id, reason };
   }
 
   function planIsValid(plan) {
@@ -124,31 +118,27 @@
     return plan.blocks.every((block) => concepts.has(block.conceptId) && problems.has(block.problemId));
   }
 
-  function getDailyPlan(state) {
-    const dayKey = window.TransferMathStorage.seoulDateKey();
-    const saved = state.dailyPlans[dayKey];
-    if (planIsValid(saved)) return saved;
-
+  function buildPlan(state, dayKey, revision = 0) {
     const blocks = [];
     const used = new Set();
 
     const weak = pickWeakConcept(state);
     if (weak) {
-      const problem = chooseProblem(weak.id, dayKey, "A");
+      const problem = chooseProblem(weak.id, dayKey, "A", revision);
       const block = makeBlock("A", "약점 복구", weak, problem, "재학습 필요 또는 부분 이해 개념을 우선합니다.");
       if (block) { blocks.push(block); used.add(weak.id); }
     }
 
     const progress = pickProgressConcept(state, used);
     if (progress) {
-      const problem = chooseProblem(progress.id, dayKey, "B");
-      const block = makeBlock("B", "새 진도", progress, problem, "현재 커리큘럼에서 선행 조건을 고려한 다음 학습입니다.");
+      const problem = chooseProblem(progress.id, dayKey, "B", revision);
+      const block = makeBlock("B", "진도 연결", progress, problem, "현재 진도를 막는 선행 개념 또는 다음 미평가 개념을 학습합니다.");
       if (block) { blocks.push(block); used.add(progress.id); }
     }
 
     const review = pickReviewConcept(state, used);
     if (review) {
-      const problem = chooseProblem(review.id, dayKey, "C");
+      const problem = chooseProblem(review.id, dayKey, "C", revision);
       const block = makeBlock("C", "간격 복습", review, problem, "이전에 이해한 개념을 독립 문제로 다시 확인합니다.");
       if (block) { blocks.push(block); used.add(review.id); }
     }
@@ -159,14 +149,31 @@
         .sort((a, b) => a.curriculumOrder - b.curriculumOrder);
       for (const concept of fallback) {
         if (blocks.length >= 3) break;
-        const problem = chooseProblem(concept.id, dayKey, `F${blocks.length}`);
+        const problem = chooseProblem(concept.id, dayKey, `F${blocks.length}`, revision);
         if (!problem) continue;
         blocks.push(makeBlock(String.fromCharCode(65 + blocks.length), "진단", concept, problem, "아직 충분한 학습 근거가 없어 진단합니다."));
         used.add(concept.id);
       }
     }
 
-    const plan = { dayKey, blocks: blocks.filter(Boolean), createdAt: new Date().toISOString() };
+    return { dayKey, revision, blocks: blocks.filter(Boolean), createdAt: new Date().toISOString() };
+  }
+
+  function getDailyPlan(state) {
+    const dayKey = window.TransferMathStorage.seoulDateKey();
+    const saved = state.dailyPlans[dayKey];
+    if (planIsValid(saved)) return saved;
+    const plan = buildPlan(state, dayKey, 0);
+    state.dailyPlans[dayKey] = plan;
+    window.TransferMathStorage.save(state);
+    return plan;
+  }
+
+  function refreshDailyPlan(state) {
+    const dayKey = window.TransferMathStorage.seoulDateKey();
+    const previous = state.dailyPlans[dayKey];
+    const revision = Number(previous?.revision || 0) + 1;
+    const plan = buildPlan(state, dayKey, revision);
     state.dailyPlans[dayKey] = plan;
     window.TransferMathStorage.save(state);
     return plan;
@@ -178,6 +185,7 @@
 
   window.TransferMathScheduler = {
     getDailyPlan,
+    refreshDailyPlan,
     conceptProblems,
     firstHardBlocker,
   };
