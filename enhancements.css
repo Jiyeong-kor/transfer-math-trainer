@@ -1,0 +1,55 @@
+.plan-item.done {
+  opacity: .68;
+  background: #f8fafc;
+}
+.plan-item.done .plan-key {
+  background: var(--success-soft);
+  color: var(--success);
+}
+.stage-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 9px;
+}
+.stage-card {
+  border: 1px solid var(--line);
+  background: var(--surface);
+  color: var(--text);
+  border-radius: 15px;
+  padding: 13px;
+  text-align: left;
+  min-width: 0;
+}
+.stage-card-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+.stage-card-head strong {
+  font-size: 13px;
+}
+.stage-card-head span,
+.stage-card small {
+  color: var(--muted);
+  font-size: 11px;
+}
+.mini-progress {
+  height: 6px;
+  background: #e8ecf2;
+  border-radius: 999px;
+  overflow: hidden;
+  margin: 9px 0 7px;
+}
+.mini-progress > div {
+  height: 100%;
+  background: var(--brand);
+  border-radius: inherit;
+}
+.full-button {
+  width: 100%;
+  margin-top: 9px;
+}
+@media (max-width: 390px) {
+  .stage-grid { grid-template-columns: 1fr; }
+}
