@@ -1,4 +1,4 @@
-const CACHE = "transfer-math-trainer-v5";
+const CACHE = "transfer-math-trainer-v4";
 const ASSETS = [
   "./",
   "./index.html",
