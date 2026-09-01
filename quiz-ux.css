@@ -1,0 +1,80 @@
+.math-result-panel,
+.answer-panel,
+.explain-card {
+  border-left: 0 !important;
+}
+
+.math-unknown-button {
+  margin-top: 14px;
+}
+
+.math-next-button {
+  margin-top: 16px;
+}
+
+.optional-review {
+  margin-top: 14px;
+  padding-top: 12px;
+  border-top: 1px solid var(--line);
+}
+
+.optional-review > strong {
+  display: block;
+  font-size: 13px;
+}
+
+.optional-review > span {
+  display: block;
+  margin-top: 4px;
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.active-grade {
+  outline: 2px solid currentColor;
+  outline-offset: -2px;
+}
+
+.update-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 14px 16px;
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  background: var(--surface);
+}
+
+.update-card strong {
+  display: block;
+  font-size: 14px;
+}
+
+.update-card p {
+  margin: 4px 0 0;
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.45;
+}
+
+.update-card .button {
+  flex: 0 0 auto;
+  min-height: 40px;
+  padding: 9px 13px;
+}
+
+@media (max-width: 390px) {
+  .study-head {
+    grid-template-columns: auto 1fr;
+  }
+
+  .study-head .status-pill {
+    grid-column: 2;
+    justify-self: end;
+  }
+
+  .update-card {
+    align-items: flex-start;
+  }
+}
