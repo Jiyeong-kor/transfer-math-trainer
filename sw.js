@@ -1,4 +1,4 @@
-const CACHE = "transfer-math-trainer-v1";
+const CACHE = "transfer-math-trainer-v2";
 const ASSETS = [
   "./",
   "./index.html",
@@ -13,7 +13,15 @@ const ASSETS = [
   "./content/curriculum.js",
   "./content/concepts.js",
   "./content/lessons.js",
+  "./content/lessons-foundation-engineering.js",
+  "./content/lessons-differential.js",
+  "./content/lessons-integral-calculus2.js",
+  "./content/lessons-linear.js",
   "./content/problems.js",
+  "./content/problems-foundation-engineering.js",
+  "./content/problems-differential.js",
+  "./content/problems-integral-calculus2.js",
+  "./content/problems-linear.js",
   "./content/learner-seed.js"
 ];
 
