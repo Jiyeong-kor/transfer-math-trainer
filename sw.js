@@ -7,6 +7,7 @@ const ASSETS = [
   "./quiz-ux.css",
   "./app.js",
   "./quiz-ux.js",
+  "./adaptive-training.js",
   "./app-update.js",
   "./manifest.webmanifest",
   "./icon.svg",
@@ -26,6 +27,7 @@ const ASSETS = [
   "./content/problems-differential.js",
   "./content/problems-integral-calculus2.js",
   "./content/problems-linear.js",
+  "./content/problems-adaptive.js",
   "./content/learner-seed.js"
 ];
 
