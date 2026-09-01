@@ -1,4 +1,4 @@
-const CACHE = "transfer-math-trainer-v4";
+const CACHE = "transfer-math-trainer-v5";
 const ASSETS = [
   "./",
   "./index.html",
@@ -29,6 +29,7 @@ const ASSETS = [
   "./content/problems-linear.js",
   "./content/problems-adaptive.js",
   "./content/problems-transfer-advanced.js",
+  "./content/problem-safety.js",
   "./content/learner-seed.js"
 ];
 
