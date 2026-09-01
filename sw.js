@@ -28,6 +28,7 @@ const ASSETS = [
   "./content/problems-integral-calculus2.js",
   "./content/problems-linear.js",
   "./content/problems-adaptive.js",
+  "./content/problems-transfer-advanced.js",
   "./content/learner-seed.js"
 ];
 
