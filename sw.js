@@ -1,8 +1,9 @@
-const CACHE = "transfer-math-trainer-v2";
+const CACHE = "transfer-math-trainer-v3";
 const ASSETS = [
   "./",
   "./index.html",
   "./styles.css",
+  "./enhancements.css",
   "./app.js",
   "./manifest.webmanifest",
   "./icon.svg",
@@ -31,9 +32,7 @@ self.addEventListener("install", (event) => {
 });
 
 self.addEventListener("activate", (event) => {
-  event.waitUntil(
-    caches.keys().then((keys) => Promise.all(keys.filter((key) => key !== CACHE).map((key) => caches.delete(key))))
-  );
+  event.waitUntil(caches.keys().then((keys) => Promise.all(keys.filter((key) => key !== CACHE).map((key) => caches.delete(key)))));
   self.clients.claim();
 });
 
