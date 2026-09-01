@@ -1,0 +1,19 @@
+{
+  "name": "편입수학 트레이너",
+  "short_name": "편입수학",
+  "description": "개념별 이해도와 선행 관계를 기반으로 학습 순서를 조정하는 개인 편입수학 트레이너",
+  "start_url": "./",
+  "display": "standalone",
+  "background_color": "#f4f7fb",
+  "theme_color": "#1e3a5f",
+  "lang": "ko",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "./icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}
